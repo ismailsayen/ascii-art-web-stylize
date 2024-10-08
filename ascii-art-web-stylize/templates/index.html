@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <p class="t">ELasri</p>
+    <div class="card">
+      <div class="content">
+        <div class="info">
+          <h3>Youssef El Asri</h3>
+          <p>yelasri</p>
+          <p><span><i class="fa-solid fa-location-dot"></i></span>Oujda, Morroco</p>
+          <a href="#">
+            <button>
+              <i class="fa-brands fa-github"></i>
+              <p>Follow me</p>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <form action="/ascii-art" method="post">
+        <label for="text">Text: </label>
+        <br />
+        <textarea name="text" id="text" maxlength="200"></textarea>
+        <br />
+        <label for="standard">Standard</label>
+        <input type="radio" name="banner" id="" value="standard" checked />
+        <label for="shadow">Shadow</label>
+        <input type="radio" name="banner" id="" value="shadow" />
+        <label for="thinkertoy">Thinkertoy</label>
+        <input type="radio" name="banner" id="" value="thinkertoy" /><br />
+        <button type="submit">Afficher</button>
+      </form>
+      {{if .}}
+      <pre>{{.}}</pre>
+      {{end}}
+    </div>
+  </body>
+</html>
