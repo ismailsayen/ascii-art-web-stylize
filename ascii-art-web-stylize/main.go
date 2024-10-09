@@ -16,7 +16,8 @@ func main() {
 		fmt.Println("Enter 1 arg")
 		return
 	}
-
+	fs := http.FileServer(http.Dir("assets"))
+	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 	http.HandleFunc("/", asciiartweb.IndexPage)
 	http.HandleFunc("/ascii-art", asciiartweb.AsciiArtPage)
 	fmt.Println("http://localhost:8080/")

@@ -19,11 +19,11 @@ func IndexPage(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet {
 			RenderTemplate(w, "./templates/index.html", nil, http.StatusOK)
 		} else {
-			a := &Error{Status: "400", Type: "Bad Request"}
+			a := Error{Status: "400", Type: "Bad Request"}
 			RenderTemplate(w, "./templates/errorPage.html", a, http.StatusBadRequest)
 		}
 	default:
-		a := &Error{Status: "404", Type: "Page Not Found"}
+		a := Error{Status: "404", Type: "Page Not Found"}
 		RenderTemplate(w, "./templates/errorPage.html", a, http.StatusNotFound)
 	}
 }
@@ -31,15 +31,32 @@ func IndexPage(w http.ResponseWriter, r *http.Request) {
 func AsciiArtPage(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		r.ParseForm()
-		if len(r.FormValue("text")) > 200 {
-			a := &Error{Status: "400", Type: "Bad Request"}
+		if len([]rune(r.FormValue("text"))) > 200 {
+			a := Error{Status: "400", Type: "Bad Request"}
 			RenderTemplate(w, "./templates/errorPage.html", a, http.StatusBadRequest)
 			return
 		}
+		if r.FormValue("text") == "" {
+			a := Error{Status: "400", Type: "Bad Request"}
+			RenderTemplate(w, "./templates/errorPage.html", a, http.StatusBadRequest)
+			return
+		}
+
 		result := asciiartweb.AsciiArt(r.FormValue("text"), r.FormValue("banner"))
+
+		if result == "Special charactere is not allowed." {
+			RenderTemplate(w, "./templates/index.html", result, http.StatusBadRequest)
+			return
+		}
+
+		if r.FormValue("banner") == "" {
+			RenderTemplate(w, "./templates/index.html", result, http.StatusBadRequest)
+			return
+		}
+
 		RenderTemplate(w, "./templates/index.html", result, http.StatusOK)
 	} else {
-		a := &Error{Status: "400", Type: "Bad Request"}
+		a := Error{Status: "400", Type: "Bad Request"}
 		RenderTemplate(w, "./templates/errorPage.html", a, http.StatusBadRequest)
 	}
 }
