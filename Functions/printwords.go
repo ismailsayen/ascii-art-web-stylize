@@ -1,4 +1,4 @@
-package asciiartweb
+package exportfile
 
 func PrintWords(words []string, slice [][]string) string {
 	str := ""

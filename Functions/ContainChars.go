@@ -1,4 +1,4 @@
-package asciiartweb
+package exportfile
 
 func ContainChars(s string) bool {
 	// verifie si le string contient des char ou juste les \n

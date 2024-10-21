@@ -1,4 +1,4 @@
-package asciiartweb
+package exportfile
 
 func Split(str string) []string {
 	slice := []string{}

@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	asciiartweb "asciiartweb/handlers"
+	exportfile "exportfile/handlers"
 )
 
 const port string = ":8080"
@@ -17,10 +17,11 @@ func main() {
 		return
 	}
 	
-	http.HandleFunc("/assets/images/", asciiartweb.ImagesHandler)
-	http.HandleFunc("/assets/css/", asciiartweb.CssHandler)
-	http.HandleFunc("/", asciiartweb.IndexPage)
-	http.HandleFunc("/ascii-art", asciiartweb.AsciiArtPage)
-	fmt.Println("http://localhost:8080/")
+	http.HandleFunc("/assets/images/", exportfile.ImagesHandler)
+	http.HandleFunc("/assets/css/", exportfile.CssHandler)
+	http.HandleFunc("/", exportfile.IndexPage)
+	http.HandleFunc("/ascii-art", exportfile.AsciiArtPage)
+	http.HandleFunc("/export",exportfile.ExportHandler)
+	fmt.Println("http://localhost"+port+"/")
 	log.Fatal(http.ListenAndServe(port, nil))
 }
